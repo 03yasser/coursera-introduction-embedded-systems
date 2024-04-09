@@ -20,7 +20,7 @@
 #ifndef __STATS_H__
 #define __STATS_H__
 
-void  print_statistics(unsigned char minimum, unsigned char maximum, unsigned char mean, unsigned char median);
+void	print_statistics(unsigned char minimum, unsigned char maximum, float mean, float median);
 /**
  * @brief Prints the statistics of a data set
  *
@@ -46,7 +46,7 @@ void	print_array(unsigned char *array, unsigned int length);
  * @return This function does not return a value
  */
 
-unsigned char	find_median(unsigned char *array, unsigned int length);
+float	find_median(unsigned char *array, unsigned int length);
 /**
  * @brief Finds the median of the given array
  *
