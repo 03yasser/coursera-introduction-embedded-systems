@@ -9,32 +9,101 @@
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
- * @brief <Add Brief Description Here >
+ * @file stats.h
+ * @brief  Declarations and macros required for the week1 assignment
  *
- * <Add Extended Description Here>
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * @author yasser boutslighoi
+ * @date 2024-04-09
  *
  */
 #ifndef __STATS_H__
 #define __STATS_H__
 
-/* Add Your Declarations and Function Comments here */ 
-
+void  print_statistics(unsigned char minimum, unsigned char maximum, unsigned char mean, unsigned char median);
 /**
- * @brief <Add Brief Description of Function Here>
+ * @brief Prints the statistics of a data set
  *
- * <Add Extended Description Here>
+ * This function takes the minimum, maximum, mean, and median of a data set as input, and prints these statistics. 
  *
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
+ * @param minimum The minimum value of the data set
+ * @param maximum The maximum value of the data set
+ * @param mean The mean value of the data set
+ * @param median The median value of the data set
  *
- * @return <Add Return Informaiton here>
+ * @return This function does not return a value
  */
 
+void	print_array(unsigned char *array, unsigned int length);
+/**
+ * @brief Prints the elements of the given array
+ *
+ * This function takes an array and its length as input, and prints each element of the array. 
+ *
+ * @param array The array to be printed
+ * @param length The number of elements in the array
+ *
+ * @return This function does not return a value
+ */
+
+unsigned char	find_median(unsigned char *array, unsigned int length);
+/**
+ * @brief Finds the median of the given array
+ *
+ * This function takes an array and its length as input, and returns the median value. 
+ *
+ * @param array The array to find the median of
+ * @param length The number of elements in the array
+ *
+ * @return The median value of the array
+ */
+
+float	find_mean(unsigned char *array, unsigned int length);
+/**
+ * @brief Finds the mean of the given array
+ *
+ * This function takes an array and its length as input, and returns the mean value. 
+ *
+ * @param array The array to find the mean of
+ * @param length The number of elements in the array
+ *
+ * @return The mean value of the array
+ */
+
+unsigned char	find_maximum(unsigned char *array, unsigned int length);
+/**
+ * @brief Finds the maximum value of the given array
+ *
+ * This function takes an array and its length as input, and returns the maximum value. 
+ *
+ * @param array The array to find the maximum value of
+ * @param length The number of elements in the array
+ *
+ * @return The maximum value of the array
+ */
+
+unsigned char	find_minimum(unsigned char *array, unsigned int length);
+/**
+ * @brief Finds the minimum value of the given array
+ *
+ * This function takes an array and its length as input, and returns the minimum value. 
+ *
+ * @param array The array to find the minimum value of
+ * @param length The number of elements in the array
+ *
+ * @return The minimum value of the array
+ */
+
+void	sort_array(unsigned char *array, unsigned int length);
+/**
+ * @brief Sorts the elements of the given array
+ *
+ * This function takes an array and its length as input, and sorts the array in place. 
+ *
+ * @param array The array to be sorted
+ * @param length The number of elements in the array
+ *
+ * @return This function does not return a value
+ */
 
 #endif /* __STATS_H__ */

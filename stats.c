@@ -40,4 +40,37 @@ void main() {
 
 }
 
-/* Add other Implementation File Code Here */
+void	print_statistics(unsigned char minimum, unsigned char maximum, unsigned char mean, unsigned char median)
+{
+
+}
+
+void	print_array(unsigned char *array, unsigned int length)
+{
+
+}
+
+unsigned char	find_median(unsigned char *array, unsigned int length)
+{
+
+}
+
+float	find_mean(unsigned char *array, unsigned int length)
+{
+
+}
+
+unsigned char	find_maximum(unsigned char *array, unsigned int length)
+{
+
+}
+
+unsigned char	find_minimum(unsigned char *array, unsigned int length)
+{
+
+}
+
+void	sort_array(unsigned char *array, unsigned int length)
+{
+
+}
