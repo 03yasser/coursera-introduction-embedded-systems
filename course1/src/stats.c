@@ -21,8 +21,8 @@
 
 
 
-#include <stdio.h>
 #include "stats.h"
+#include "platform.h"
 
 /* Size of the Data Set */
 #define SIZE (40)
@@ -39,7 +39,7 @@ void main()
 	float mean;
 	float median;
 
-	printf("Array before sorting: \n");
+	PRINTF("Array before sorting: \n");
 	print_array(test, SIZE);
 	median = find_median(test, SIZE);
 	mean = find_mean(test, SIZE);
@@ -47,27 +47,30 @@ void main()
 	minimum = find_minimum(test, SIZE);
 	print_statistics(minimum, maximum, mean, median);
 	sort_array(test, SIZE);
-	printf("Array after sorting: \n");
+	PRINTF("Array after sorting: \n");
 	print_array(test, SIZE);
 
 }
 
 void	print_statistics(unsigned char minimum, unsigned char maximum, float mean, float median)
 {
-	printf("Minimum: %u\n", minimum);
-	printf("Maximum: %u\n", maximum);
-	printf("Mean: %.2f\n", mean);
-	printf("Median: %.2f\n", median);
+	PRINTF("Minimum: %u\n", minimum);
+	PRINTF("Maximum: %u\n", maximum);
+	PRINTF("Mean: %.2f\n", mean);
+	PRINTF("Median: %.2f\n", median);
 }
 
 void	print_array(unsigned char *array, unsigned int length)
 {
-	// Check if the array is not null
-	if (!array)
-		return ;
-	for(int i = 0; i < length; i++)
-		printf("%d|", array[i]);
-	printf("\n");
+	#ifdef VERBOSE
+		// Check if the array is not null
+		if (!array)
+			return ;
+		for(int i = 0; i < length; i++)
+			PRINTF("%d|", array[i]);
+		PRINTF("\n");
+	#endif
+	return ;
 }
 
 float	find_median(unsigned char *array, unsigned int length)

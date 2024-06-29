@@ -21,21 +21,79 @@
 #      <Put a description of the supported Overrides here
 #
 #------------------------------------------------------------------------------
+
 include sources.mk
 
 # Platform Overrides
-PLATFORM = 
+PLATFORM = HOST
 
 # Architectures Specific Flags
-LINKER_FILE = 
-CPU = 
-ARCH = 
-SPECS = 
+LINKER_FILE = ./msp432p401r.lds
 
 # Compiler Flags and Defines
-CC = 
-LD = 
-LDFLAGS = 
-CFLAGS = 
-CPPFLAGs = 
+
+TARGET = c1m2
+CFLAGS = -Wall -Werror -g -O0 -std=c99
+
+ifeq ($(PLATFORM), HOST)
+	SOURCES = $(addprefix src/,$(SRC))
+	CC = gcc
+	CPPFLAGS = -DHOST -DCOURSE1 -DVERBOSE $(INCLUDES)
+	SIZE = size
+else
+	CC = arm-none-eabi-gcc 
+	CPU = cortex-m4
+	ARCH = armv7e-m
+	SCPECS = nosys.specs
+	LD = arm-none-eabi-ld
+	CFLAGS += -mcpu=$(CPU) \
+				-mthumb \
+				-march=$(ARCH) \
+				-mfloat-abi=hard \
+				-mfpu=fpv4-sp-d16 \
+				--specs=$(SCPECS)
+	SRC+= ./startup_msp432p401r_gcc.c \
+				./system_msp432p401r.c \
+				./interrupts_msp432p401r_gcc.c
+	SOURCES = $(addprefix src/,$(SRC))
+	
+	INCLUDES+= -I ../include/CMSIS/ \
+				-I ../include/msp432/
+	CPPFLAGS = -DMSP432 -DCOURSE1 -DVERBOSE $(INCLUDES)
+	LDFLAGS = -Wl,-Map=$(TARGET).map -T $(LINKER_FILE)
+	size = arm-none-eabi-size
+endif
+
+PREP = $(SOURCES:.c=.i)
+DEP = $(SOURCES:.c=.d)
+ASM = $(SOURCES:.c=.asm)
+OBJS = $(SOURCES:.c=.o)
+
+.PHONY: compile-all build clean
+
+build: $(TARGET).out
+
+$(TARGET).out: $(OBJS)
+	$(CC) $(OBJS) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@
+	$(SIZE) $@
+
+%.i: %.c
+	$(CC) -E $< $(CFLAGS) $(CPPFLAGS) -o $@
+
+%.asm: %.c
+	$(CC) -S $< $(CFLAGS) $(CPPFLAGS) -o $@
+
+%.o: %.c
+	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
+
+%.d: %.c
+	$(CC) -M $<  $(CPPFLAGS) -o $@
+
+
+compile-all: $(OBJS)
+
+clean:
+	rm -f *.out *.map *.o *.asm *.i *.d
+
+
 
