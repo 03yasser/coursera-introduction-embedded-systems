@@ -20,7 +20,7 @@
  * @date April 1 2017
  *
  */
-#include "course1/include/common/memory.h"
+#include "memory.h"
 
 /***********************************************************
  Function Definitions
@@ -54,6 +54,7 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length)
 
 	if (!dst && !src)
 		return (NULL);
+	// If the destination is greater than the source, copy the elements in reverse order
 	if (dst > src)
 	{
 		i = length;
@@ -94,6 +95,7 @@ uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value)
 	i = 0;
 	if (!src)
 		return (NULL);
+	// Set each byte in the memory region to the specified value
 	while (i < length)
 	{
 		*(src + i) = value;
@@ -109,6 +111,7 @@ uint8_t * my_memzero(uint8_t * src, size_t length)
 	i = 0;
 	if (!src)
 		return (NULL);
+	// Set each byte in the memory region to zero
 	while (i < length)
 	{
 		*(src + i) = 0;
@@ -119,15 +122,19 @@ uint8_t * my_memzero(uint8_t * src, size_t length)
 
 uint8_t * my_reverse(uint8_t * src, size_t length)
 {
-	size_t	i;
+	size_t		i;
+	u_int8_t	temp;
 
 	i = 0;
 	if (!src)
 		return (NULL);
-	while (i < length/2)
+	// Swap the elements in the first half with the corresponding elements in the second half
+	while (i < length / 2)
 	{
-		*(src + i) = *(src + length - i);
-		i++;
+		temp = *(src + i);
+        *(src + i) = *(src + length - i - 1);
+        *(src + length - i - 1) = temp;
+        i++;
 	}
 	return (src);
 }
@@ -136,6 +143,7 @@ int32_t * reserve_words(size_t length)
 {
 	int32_t	*words;
 
+	// Allocate memory for the array of 32-bit integers
 	words = malloc(length * sizeof(int32_t));
 	if (!words)
 		return (NULL);

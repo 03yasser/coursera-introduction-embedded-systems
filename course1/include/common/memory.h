@@ -22,9 +22,7 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
-typedef unsigned char	uint8_t;
-typedef unsigned long	size_t;
-typedef signed int int32_t;
+#include <stdlib.h>
 
 #ifndef NULL
 #define NULL ((void*)0)

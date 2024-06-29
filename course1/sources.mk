@@ -11,7 +11,9 @@
 
 # Add your Source files to this variable
 SRC = main.c \
-			memory.c \
+	memory.c \
+	course1.c \
+	data.c
 
 # Add your include paths to this variable
 INCLUDES = -I ./include/common

@@ -32,8 +32,8 @@ LINKER_FILE = ./msp432p401r.lds
 
 # Compiler Flags and Defines
 
-TARGET = c1m2
-CFLAGS = -Wall -Werror -g -O0 -std=c99
+TARGET = c1m3
+CFLAGS = -Wall -Werror -g -O0 -std=c99 
 
 ifeq ($(PLATFORM), HOST)
 	SOURCES = $(addprefix src/,$(SRC))
@@ -41,7 +41,7 @@ ifeq ($(PLATFORM), HOST)
 	CPPFLAGS = -DHOST -DCOURSE1 -DVERBOSE $(INCLUDES)
 	SIZE = size
 else
-	CC = arm-none-eabi-gcc 
+	CC = arm-none-eabi-gcc
 	CPU = cortex-m4
 	ARCH = armv7e-m
 	SCPECS = nosys.specs
@@ -65,7 +65,7 @@ else
 endif
 
 PREP = $(SOURCES:.c=.i)
-DEP = $(SOURCES:.c=.d)
+DEPS = $(SOURCES:.c=.d)
 ASM = $(SOURCES:.c=.asm)
 OBJS = $(SOURCES:.c=.o)
 
@@ -93,7 +93,7 @@ $(TARGET).out: $(OBJS)
 compile-all: $(OBJS)
 
 clean:
-	rm -f *.out *.map *.o *.asm *.i *.d
+	rm -f $(PREP) $(DEPS) $(ASMS) $(OBJS) *.map $(TARGET).out
 
 
 
